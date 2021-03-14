@@ -55,8 +55,19 @@
         <v-col cols="12" md="4">
           <v-card class="mt-10" elevation="2" outlined>
             <v-container class="text-center">
-              <h2 class="text-start">ID Room</h2>
-              <v-text-field class="mt-4" v-model="idRoom" outlined />
+              <h2 class="text-start">Admin Controler</h2>
+              <v-text-field
+                class="mt-4"
+                v-model="idRoom"
+                outlined
+                placeholder="ID Room"
+              />
+              <v-text-field
+                class="mt-4"
+                v-model="idUser"
+                outlined
+                placeholder="User Email"
+              />
               <v-btn @click="update" color="success" class="mr-2"
                 >Check In</v-btn
               >
@@ -76,6 +87,7 @@ export default {
   data: () => ({
     user: null,
     idRoom: null,
+    idUser: null,
     dataList: []
   }),
   beforeCreate() {
@@ -119,7 +131,7 @@ export default {
     },
     update() {
       db.collection("rentRoom")
-        .doc(this.idRoom)
+        .doc(this.idRoom + "_" + this.idUser)
         .update({
           status: "Stay in"
         })
@@ -148,7 +160,7 @@ export default {
     },
     cansel() {
       db.collection("rentRoom")
-        .doc(this.idRoom)
+        .doc(this.idRoom + "_" + this.idUser)
         .delete()
         .then(() => {
           console.log("Document successfully deleted!");

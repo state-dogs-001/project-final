@@ -209,7 +209,7 @@ export default {
           status: "Waiting to check"
         };
         db.collection("rentRoom")
-          .doc(this.id.toString())
+          .doc(this.id.toString() + "_" + this.user)
           .set(data)
           .then(() => {
             console.log("Document successfully written!");
